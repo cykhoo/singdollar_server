@@ -6,3 +6,16 @@ task :default => :spec
 
 desc "Run all specs in spec directory"
 RSpec::Core::RakeTask.new(:spec)
+
+desc "Visit the website named in website_url"
+
+task :visit_website do
+  uri = URI.parse(website_url)
+  Net::HTTP.get(uri)
+  puts "Visited website #{website_url}"
+end
+
+
+def website_url
+  "http://singdollar.herokuapp.com”
+end

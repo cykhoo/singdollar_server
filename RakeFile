@@ -15,7 +15,6 @@ task :visit_website do
   puts "Visited website #{website_url}"
 end
 
-
 def website_url
-  "http://singdollar.herokuapp.com”
+  "http://singdollar.herokuapp.com/rates"
 end

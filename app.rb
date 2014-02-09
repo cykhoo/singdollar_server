@@ -1,7 +1,6 @@
 require 'sinatra'
 require 'singdollar'
 require "sinatra/reloader" if development?
-require 'newrelic_rpm' if production?
 require 'memcachier'
 require 'dalli'
 

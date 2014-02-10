@@ -18,8 +18,8 @@ def rates_xml
   content_type :xml
 
   settings.cache.fetch("exchange_rates") do
-    exchange_rates = SingDollar.create
+    exchange_rates = SingDollar.create.to_xml
     settings.cache.set("exchange_rates", exchange_rates, 600)
     exchange_rates
-  end.to_xml
+  end
 end

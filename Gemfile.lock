@@ -1,7 +1,7 @@
 GIT
   remote: https://privategem:egS-dge-oS4-6ZN@bitbucket.org/cykhoo/singdollar.git
-  revision: 26bf1c6d825b4f25450cb7c88509c4f16f2022e7
-  tag: v0.0.5
+  revision: 76abf647561e8bbf6eeb38cf08a2849781765eb8
+  tag: v0.0.6
   specs:
     singdollar (0.0.1)
       mechanize

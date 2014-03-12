@@ -1,3 +1,3 @@
-require './app'
+require './singdollar_server'
 
-run Sinatra::Application
+run SingdollarServer

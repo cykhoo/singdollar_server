@@ -1,15 +1,10 @@
-require 'rack/test'
-require 'rspec'
-require 'capybara/rspec'
-require_relative '../app'
-
 ENV['RACK_ENV'] = 'test'
 
-def app
-  Sinatra::Application
-end
+require_relative '../singdollar_server'
+require 'rspec'
+require 'capybara/rspec'
 
-Capybara.app = Sinatra::Application
+Capybara.app = SingdollarServer
 
 RSpec.configure do |conf|
   conf.include Rack::Test::Methods

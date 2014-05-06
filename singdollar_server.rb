@@ -23,7 +23,7 @@ class SingdollarServer < Sinatra::Base
     rates_fmpxml
   end
 
-  get '/rates' do
+  get '/rates.xml' do
     rates_xml
   end
 

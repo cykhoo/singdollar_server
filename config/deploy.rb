@@ -31,25 +31,25 @@ end
 
 task :setup => :environment do
 
-  # set up log file and make it persist between deploys
+  # make shared log directory for apps to store log files
   queue! %[mkdir -p "#{deploy_to}/shared/log"]
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/log"]
 
-  # set up shared configuration directory
+ # make shared config directory for database.yml and secrets.yml
   queue! %[mkdir -p "#{deploy_to}/shared/config"]
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/config"]
 
-  # set up .env in shared directory for environment variables
+  # set up .env in shared config directory for environment variables
   # populate with values from local .env.production file
   project_dir = File.expand_path('../..', __FILE__)
   env_vars = File.read(project_dir + '/.env.production')
   queue! %[echo -n "#{env_vars}" > "#{deploy_to}/shared/.env"]
 
-  # set up directory to store pid files
+  # make pids directory for apps to store pid files
   queue! %[mkdir -p "#{deploy_to}/shared/pids"]
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/pids"]
 
-  # make shared sockets file for unicorn
+  # make sockets directory for apps to store socket files
   queue! %[mkdir -p "#{deploy_to}/shared/sockets"]
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/sockets"]
 

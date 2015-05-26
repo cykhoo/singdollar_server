@@ -13,7 +13,7 @@ set :user,          'deployer'
 set :forward_agent, true
 set :port,          '22'
 set :unicorn_pid,   "#{deploy_to}/shared/pids/unicorn.pid"
-set :rbenv_path,    '/usr/local/rbenv/'
+set :rbenv_path,    '/usr/local/rbenv'
 
 set :shared_paths,  ['config/database.yml', 'log', 'config/secrets.yml', '.env']
 

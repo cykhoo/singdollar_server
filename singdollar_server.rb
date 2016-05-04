@@ -9,10 +9,6 @@ class SingdollarServer < Sinatra::Base
     require 'sinatra/reloader'
   end
 
-  configure :production do
-    require 'newrelic_rpm'
-  end
-
   set :cache, Dalli::Client.new
 
   get '/' do

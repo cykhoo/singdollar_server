@@ -6,7 +6,6 @@ gem 'sinatra'
 gem 'unicorn'
 gem 'memcachier'
 gem 'dalli'
-gem 'newrelic_rpm'
 
 gem 'singdollar', git: 'https://privategem:egS-dge-oS4-6ZN@bitbucket.org/cykhoo/singdollar.git'
 

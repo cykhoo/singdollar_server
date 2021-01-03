@@ -1,11 +1,12 @@
 source "http://rubygems.org"
 
-ruby '2.7.2'
+ruby '3.0.0'
 
 gem 'sinatra'
 gem 'puma'
 gem 'memcachier'
 gem 'dalli'
+gem 'webrick'
 
 gem 'singdollar', git: 'https://privategem:egS-dge-oS4-6ZN@bitbucket.org/cykhoo/singdollar.git'
 

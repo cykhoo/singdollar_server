@@ -8,7 +8,9 @@ gem 'memcachier'
 gem 'dalli'
 gem 'webrick'
 
-gem 'singdollar', git: 'https://privategem:egS-dge-oS4-6ZN@bitbucket.org/cykhoo/singdollar.git'
+source 'https://rubygems.pkg.github.com/cykhoo' do
+  gem 'singdollar'
+end
 
 # use mina for deployment
 # gem 'mina'

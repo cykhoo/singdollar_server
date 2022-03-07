@@ -1,11 +1,3 @@
-GIT
-  remote: https://privategem:egS-dge-oS4-6ZN@bitbucket.org/cykhoo/singdollar.git
-  revision: e8666978c4e2e918984804887bd83101004c3770
-  specs:
-    singdollar (0.0.8)
-      mechanize
-      nokogiri
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -99,6 +91,13 @@ GEM
     webrobots (0.1.2)
     xpath (3.2.0)
       nokogiri (~> 1.8)
+
+GEM
+  remote: https://rubygems.pkg.github.com/cykhoo/
+  specs:
+    singdollar (0.0.8)
+      mechanize
+      nokogiri
 
 PLATFORMS
   ruby

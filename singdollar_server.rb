@@ -27,7 +27,7 @@ class SingdollarServer < Sinatra::Base
     content_type :xml
 
     settings.cache.fetch("exchange_rates") do
-      exchange_rates = SingDollar.create.to_xml
+      exchange_rates = SingDollar.exchange_rates.to_xml
       settings.cache.set("exchange_rates", exchange_rates, 600)
       exchange_rates
     end
@@ -37,7 +37,7 @@ class SingdollarServer < Sinatra::Base
     content_type :xml
 
     settings.cache.fetch("exchange_rates_fmpxml") do
-      exchange_rates = SingDollar.create.to_fmpxml
+      exchange_rates = SingDollar.exchange_rates.to_fmpxml
       settings.cache.set("exchange_rates_fmpxml", exchange_rates, 600)
       exchange_rates
     end

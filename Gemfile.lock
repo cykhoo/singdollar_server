@@ -73,7 +73,7 @@ GEM
 GEM
   remote: https://rubygems.pkg.github.com/cykhoo/
   specs:
-    singdollar (1.0)
+    singdollar (1.0.1)
       capybara
       nokogiri
       selenium-webdriver (< 4.0)

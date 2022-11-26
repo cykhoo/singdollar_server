@@ -19,6 +19,11 @@ class SingdollarServer < Sinatra::Base
     rates_xml
   end
 
+  not_found do
+    status 404
+    erb :not_found
+  end
+
   def rates_xml
     content_type :xml
     SingDollar.exchange_rates.to_xml

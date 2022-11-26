@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby '3.1.1'
+ruby '3.1.3'
 
 gem 'sinatra'
 gem 'puma'

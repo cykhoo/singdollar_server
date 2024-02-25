@@ -2,13 +2,11 @@ source "https://rubygems.org"
 
 ruby '3.1.3'
 
+gem 'singdollar', github: 'cykhoo/singdollar'
 gem 'sinatra'
 gem 'puma'
 gem 'webrick'
 
-source 'https://rubygems.pkg.github.com/cykhoo' do
-  gem 'singdollar'
-end
 
 # use mina for deployment
 # gem 'mina'

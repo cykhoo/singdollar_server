@@ -6,13 +6,18 @@ RUN apt update
 # install packages
 RUN apt install -y git wget unzip gnupg
 
-# set up chrome PPA
-RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
-RUN echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list
+# add key to keyring
+RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor | \
+    tee /usr/share/keyrings/google-archive-keyring.gpg > /dev/null
 
 # download chrome
 RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 RUN apt install -y ./google-chrome-stable_current_amd64.deb/
+# add repository as source
+RUN echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/google-archive-keyring.gpg] \
+    https://dl.google.com/linux/chrome/deb/ stable main" | \
+    tee /etc/apt/sources.list.d/google-chrome.list
+
 
 # Set up chromedriver environment variables
 ENV CHROME_VERSION 122.0.6261.69

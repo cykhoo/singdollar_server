@@ -20,7 +20,7 @@ RUN apt update
 RUN apt install -y google-chrome-stable
 
 # Set up chromedriver environment variables
-ENV CHROME_VERSION 122.0.6261.69
+ENV CHROME_VERSION 122.0.6261.128
 ENV CHROMEDRIVER_DIR /chromedriver
 RUN mkdir $CHROMEDRIVER_DIR
 

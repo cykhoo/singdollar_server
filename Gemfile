@@ -6,6 +6,7 @@ gem 'singdollar', github: 'cykhoo/singdollar'
 gem 'sinatra'
 gem 'puma'
 gem 'webrick'
+gem 'bigdecimal'
 
 
 # use mina for deployment

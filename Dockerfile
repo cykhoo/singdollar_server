@@ -45,4 +45,4 @@ RUN gem install foreman
 
 CMD ["foreman", "start"]
 
-EXPOSE 5000
+EXPOSE 4000

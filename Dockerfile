@@ -32,6 +32,6 @@ COPY . .
 
 RUN gem install foreman
 
-CMD ["foreman", "start"]
+CMD ["RACK_ENV=production", "foreman", "start"]
 
 EXPOSE 4000

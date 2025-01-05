@@ -1,19 +1,7 @@
 FROM ruby:3.4.1
 
 # update apt and install packages
-RUN apt update && apt install -y git wget unzip gnupg
-
-# add key to keyring
-RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor | \
-    tee /usr/share/keyrings/google-archive-keyring.gpg > /dev/null
-
-# add repository as source
-RUN echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/google-archive-keyring.gpg] \
-    https://dl.google.com/linux/chrome/deb/ stable main" | \
-    tee /etc/apt/sources.list.d/google-chrome.list
-
-# update apt and install google chrome
-RUN apt update && apt install -y google-chrome-stable
+RUN apt update && apt install -y wget unzip
 
 # Set up chromedriver environment variables
 ENV CHROME_VERSION=131.0.6778.205
@@ -22,8 +10,13 @@ ENV CHROMEDRIVER_DIR=/chromedriver
 # download and install chromedriver
 RUN mkdir $CHROMEDRIVER_DIR
 RUN wget -q --continue -P $CHROMEDRIVER_DIR "https://storage.googleapis.com/chrome-for-testing-public/$CHROME_VERSION/linux64/chromedriver-linux64.zip"
-RUN unzip $CHROMEDRIVER_DIR/chromedriver* -d $CHROMEDRIVER_DIR
-RUN mv /chromedriver/chromedriver*/chromedriver /usr/local/bin
+RUN wget -q --continue -P $CHROMEDRIVER_DIR "https://storage.googleapis.com/chrome-for-testing-public/$CHROME_VERSION/linux64/chrome-linux64.zip"
+
+RUN unzip $CHROMEDRIVER_DIR/chromedriver-linux64.zip -d $CHROMEDRIVER_DIR
+RUN unzip $CHROMEDRIVER_DIR/chrome-linux64.zip -d $CHROMEDRIVER_DIR
+
+RUN mv $CHROMEDRIVER_DIR/chromedriver-linux64/chromedriver /usr/local/bin
+RUN mv $CHROMEDRIVER_DIR/chrome-linux64/chrome /usr/local/bin
 
 # switch to project directory
 WORKDIR /singdollar_server

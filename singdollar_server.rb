@@ -7,6 +7,10 @@ class SingdollarServer < Sinatra::Base
     require 'sinatra/reloader'
   end
 
+  configure :production do
+    set :host_authorization, { permitted_hosts: [] }
+  end
+
   get '/' do
     erb :index
   end

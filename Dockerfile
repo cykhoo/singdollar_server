@@ -1,10 +1,7 @@
 FROM ruby:3.4.1
 
-# update apt
-RUN apt update
-
-# install packages
-RUN apt install -y git wget unzip gnupg
+# update apt and install packages
+RUN apt update && apt install -y git wget unzip gnupg
 
 # add key to keyring
 RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor | \
@@ -16,15 +13,14 @@ RUN echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/g
     tee /etc/apt/sources.list.d/google-chrome.list
 
 # update apt and install google chrome
-RUN apt update
-RUN apt install -y google-chrome-stable
+RUN apt update && apt install -y google-chrome-stable
 
 # Set up chromedriver environment variables
 ENV CHROME_VERSION=131.0.6778.205
 ENV CHROMEDRIVER_DIR=/chromedriver
-RUN mkdir $CHROMEDRIVER_DIR
 
 # download and install chromedriver
+RUN mkdir $CHROMEDRIVER_DIR
 RUN wget -q --continue -P $CHROMEDRIVER_DIR "https://storage.googleapis.com/chrome-for-testing-public/$CHROME_VERSION/linux64/chromedriver-linux64.zip"
 RUN unzip $CHROMEDRIVER_DIR/chromedriver* -d $CHROMEDRIVER_DIR
 RUN mv /chromedriver/chromedriver*/chromedriver /usr/local/bin

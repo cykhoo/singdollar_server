@@ -37,4 +37,9 @@ class SingdollarServer < Sinatra::Base
     content_type :xml
     SingDollar.exchange_rates.to_fmpxml
   end
+
+  get "/health" do
+    content_type "text/plain"
+    "ok"
+  end
 end

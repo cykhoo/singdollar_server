@@ -1,37 +1,32 @@
-FROM ruby:3.4.1
+# syntax=docker/dockerfile:1.7
+ARG RUBY_VERSION=3.4.1
+FROM ruby:${RUBY_VERSION}-slim-bookworm
 
-# update apt and install packages
-RUN apt update && apt install -y wget unzip
+ENV APP_HOME=/app RACK_ENV=production
+WORKDIR ${APP_HOME}
 
-# Set up chromedriver environment variables
-ENV CHROME_VERSION=131.0.6778.205
-ENV CHROMEDRIVER_DIR=/chromedriver
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends build-essential git openssh-client curl pkg-config libssl-dev \
+ && rm -rf /var/lib/apt/lists/*
 
-# download and install chromedriver
-RUN mkdir $CHROMEDRIVER_DIR
-RUN wget -q --continue -P $CHROMEDRIVER_DIR "https://storage.googleapis.com/chrome-for-testing-public/$CHROME_VERSION/linux64/chromedriver-linux64.zip"
-RUN wget -q --continue -P $CHROMEDRIVER_DIR "https://storage.googleapis.com/chrome-for-testing-public/$CHROME_VERSION/linux64/chrome-linux64.zip"
+# GitHub host key
+RUN mkdir -p -m 700 /root/.ssh \
+ && ssh-keyscan github.com >> /root/.ssh/known_hosts
 
-RUN unzip $CHROMEDRIVER_DIR/chromedriver-linux64.zip -d $CHROMEDRIVER_DIR
-RUN unzip $CHROMEDRIVER_DIR/chrome-linux64.zip -d $CHROMEDRIVER_DIR
+# Bundle first for cache
+COPY Gemfile Gemfile.lock ./
 
-RUN mv $CHROMEDRIVER_DIR/chromedriver-linux64/chromedriver /usr/local/bin
-RUN mv $CHROMEDRIVER_DIR/chrome-linux64/chrome /usr/local/bin
+# Private git repos via HTTPS
+RUN --mount=type=secret,id=github_pat \
+    TOKEN="$(cat /run/secrets/github_pat)" && \
+    git config --global url."https://${TOKEN}:x-oauth-basic@github.com/".insteadOf "https://github.com/" && \
+    bundle config set without 'development test' && \
+    bundle install --jobs 4 --retry 3 && \
+    git config --global --unset url."https://${TOKEN}:x-oauth-basic@github.com/".insteadOf
 
-# switch to project directory
-WORKDIR /singdollar_server
-
-# copy Gemfile and Gemfile.lock into image
-COPY ./Gemfile* .
-
-# install gems
-RUN bundle install
-
-# copy source code into image
+# App code last
 COPY . .
 
-RUN gem install foreman
-
-CMD ["RACK_ENV=production", "foreman", "start"]
-
 EXPOSE 4000
+# add get('/health'){ 'ok' } in the app and use SELENIUM_REMOTE_URL
+CMD ["bundle","exec","rackup","-p","4000","-o","0.0.0.0"]

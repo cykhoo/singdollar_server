@@ -36,5 +36,4 @@ RUN --mount=type=secret,id=github_pat \
 COPY . .
 
 EXPOSE 4000
-# add get('/health'){ 'ok' } in the app and use SELENIUM_REMOTE_URL
-CMD ["bundle","exec","rackup","-p","4000","-o","0.0.0.0"]
+CMD ["bundle","exec","puma","-C","config/puma.rb"]

@@ -11,7 +11,7 @@ describe 'XML rates' do
     end
 
     it "has a singdollar element" do
-      expect(page.body).to include('<singdollar>')
+      expect(page.body).to include('<singdollar')
     end
 
     it "has an exchange rates element" do

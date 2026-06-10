@@ -1,18 +1,16 @@
 GIT
   remote: https://github.com/cykhoo/singdollar.git
-  revision: 47c54d975f97f7eb120ad0a7077030a1fbca532b
+  revision: e24c08a612bb6d57e980a677f42ff1e186cc4c08
   specs:
-    singdollar (1.3)
-      capybara (>= 3.40)
+    singdollar (1.3.1)
       nokogiri
-      selenium-webdriver (>= 4.8, < 5)
       thor
 
 GEM
   remote: https://rubygems.org/
   specs:
-    addressable (2.8.7)
-      public_suffix (>= 2.0.2, < 7.0)
+    addressable (2.9.0)
+      public_suffix (>= 2.0.2, < 8.0)
     base64 (0.3.0)
     bigdecimal (3.3.1)
     capybara (3.40.0)
@@ -32,27 +30,27 @@ GEM
     mustermann (3.0.4)
       ruby2_keywords (~> 0.0.1)
     nio4r (2.7.5)
-    nokogiri (1.18.10-aarch64-linux-gnu)
+    nokogiri (1.19.3-aarch64-linux-gnu)
       racc (~> 1.4)
-    nokogiri (1.18.10-aarch64-linux-musl)
+    nokogiri (1.19.3-aarch64-linux-musl)
       racc (~> 1.4)
-    nokogiri (1.18.10-arm-linux-gnu)
+    nokogiri (1.19.3-arm-linux-gnu)
       racc (~> 1.4)
-    nokogiri (1.18.10-arm-linux-musl)
+    nokogiri (1.19.3-arm-linux-musl)
       racc (~> 1.4)
-    nokogiri (1.18.10-arm64-darwin)
+    nokogiri (1.19.3-arm64-darwin)
       racc (~> 1.4)
-    nokogiri (1.18.10-x86_64-darwin)
+    nokogiri (1.19.3-x86_64-darwin)
       racc (~> 1.4)
-    nokogiri (1.18.10-x86_64-linux-gnu)
+    nokogiri (1.19.3-x86_64-linux-gnu)
       racc (~> 1.4)
-    nokogiri (1.18.10-x86_64-linux-musl)
+    nokogiri (1.19.3-x86_64-linux-musl)
       racc (~> 1.4)
-    public_suffix (6.0.2)
+    public_suffix (7.0.5)
     puma (7.1.0)
       nio4r (~> 2.0)
     racc (1.8.1)
-    rack (3.2.4)
+    rack (3.2.6)
     rack-protection (4.2.1)
       base64 (>= 0.1.0)
       logger (>= 1.6.0)
@@ -62,7 +60,7 @@ GEM
       rack (>= 3.0.0)
     rack-test (2.2.0)
       rack (>= 1.3)
-    regexp_parser (2.11.3)
+    regexp_parser (2.12.0)
     rexml (3.4.4)
     rspec (3.13.2)
       rspec-core (~> 3.13.0)
@@ -78,8 +76,8 @@ GEM
       rspec-support (~> 3.13.0)
     rspec-support (3.13.6)
     ruby2_keywords (0.0.5)
-    rubyzip (3.2.2)
-    selenium-webdriver (4.38.0)
+    rubyzip (3.3.1)
+    selenium-webdriver (4.44.0)
       base64 (~> 0.2)
       logger (~> 1.4)
       rexml (~> 3.2, >= 3.2.5)
@@ -98,7 +96,7 @@ GEM
       rack-protection (= 4.2.1)
       sinatra (= 4.2.1)
       tilt (~> 2.0)
-    thor (1.4.0)
+    thor (1.5.0)
     tilt (2.6.1)
     webrick (1.9.1)
     websocket (1.2.11)
@@ -127,7 +125,7 @@ DEPENDENCIES
   webrick
 
 RUBY VERSION
-   ruby 3.4.1p0
+   ruby 4.0.5p0
 
 BUNDLED WITH
    2.7.0

@@ -3,6 +3,7 @@ ENV['RACK_ENV'] = 'test'
 require_relative '../singdollar_server'
 require 'rspec'
 require 'capybara/rspec'
+require 'json'
 
 Capybara.app = SingdollarServer
 
@@ -11,31 +12,35 @@ RSpec.configure do |conf|
   conf.include Capybara::DSL
 
   conf.before do
-    allow(SingDollar).to receive(:exchange_rates).and_return(test_exchange_rates)
+    SingdollarServer.reset_exchange_rates_cache!
+
+    allow_any_instance_of(SingDollar::Fetcher)
+      .to receive(:fetch_exchange_rates_json)
+      .and_return(test_exchange_rates_json)
   end
 end
 
-def test_exchange_rates
-  rates = SingDollar::ExchangeRates.new
-  rates.date_time = Time.utc(2026, 6, 10, 7, 0, 12)
+def test_exchange_rates_json
+  JSON.generate(
+    'lastUpdated' => '2026-06-10T07:00:12+08:00',
+    'fxRatesSgd' => test_currency_codes.each_with_index.map do |currency, index|
+      {
+        'baseCurrencyCode' => currency.to_s.upcase,
+        'unitForSGDExchange' => 1,
+        'tieredExchangeRates' => [
+          {
+            'tierLevel' => 1,
+            'bankBuyRate' => (1.10 + (index / 100.0)).round(4),
+            'bankSellRate' => (1.20 + (index / 100.0)).round(4)
+          }
+        ]
+      }
+    end
+  )
+end
 
+def test_currency_codes
   %i[
     usd aud cad cnh dkk eur hkd inr idr jpy nzd nok lkr gbp sek chf thb
-  ].each_with_index do |currency, index|
-    rates[currency] = SingDollar::ExchangeRate.new(
-      currency: currency,
-      bank_buying: test_transaction(currency, :bank_buying, 1.10 + (index / 100.0)),
-      bank_selling: test_transaction(currency, :bank_selling, 1.20 + (index / 100.0))
-    )
-  end
-
-  rates
-end
-
-def test_transaction(currency, type, rate)
-  SingDollar::Transaction.new(
-    currency: currency,
-    type: type,
-    rate: rate.round(4)
-  )
+  ]
 end

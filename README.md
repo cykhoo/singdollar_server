@@ -22,6 +22,11 @@ rates.fmpxml: rates in XML format with FMPXMLRESULT grammar
 
 rates.xml: rates in XML format
 
+## Configuration
+
+`EXCHANGE_RATES_CACHE_TTL`: seconds to cache fetched OCBC rates per process.
+Defaults to `300`.
+
 ## Copyright
 
 Copyright 2013-2024 Chong-Yee Khoo. All rights reserved.
